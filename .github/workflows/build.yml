@@ -19,4 +19,5 @@ jobs:
             - name: Execute Gradle build
               env:
                   GE_URL: ${{ secrets.GE_URL }}
+                  GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
               run: ./gradlew assembleDebug
