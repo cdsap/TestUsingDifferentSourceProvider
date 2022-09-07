@@ -19,7 +19,7 @@ jobs:
             - name: Execute Gradle build
               env:
                   GE_URL: ${{ secrets.GE_URL }}
-                  A: ${{ secrets.env.TT }}
+                  A: ${{ secrets.HH }}
                   B: ${{ env.TT }}
                   C: "ALIO"
               run: |
