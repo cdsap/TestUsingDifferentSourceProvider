@@ -21,9 +21,12 @@ jobs:
                   GE_URL: ${{ secrets.GE_URL }}
                   A: ${{ secrets.env.TT }}
                   B: ${{ env.TT }}
+                  C: "ALIO"
               run: |
                 echo "1"
                 echo $A
                 echo "2"
                 echo $B
+                echo "3"
+                echo $C
 
