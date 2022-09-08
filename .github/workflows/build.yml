@@ -15,7 +15,11 @@ jobs:
 
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
-
+            - name: Install SDKMAN, Gradle Profiler
+              run: |
+                  curl -s "https://get.sdkman.io" | bash
+                  source "$HOME/.sdkman/bin/sdkman-init.sh"
+                  sdk install gradleprofiler 0.18.0
             - name: Execute Gradle build
               env:
                   GE_URL: ${{ secrets.GE_URL }}
