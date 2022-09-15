@@ -11,13 +11,8 @@ plugins {
 allprojects{
     normalization {
         runtimeClasspath {
-            ignore '**/internal/jimage/decompressor/**'
-            ignore '**/internal/jrtfs/**'
-            ignore 'release'
-            ignore '**/modules'
-            metaInf {
-                ignoreCompletely()
-            }
+            ignore '**/module-descriptor.txt' // don't need if you are up to date on AGP cache plug in fix
+            ignore '**/java/lang/invoke/**'
         }
     }
 
