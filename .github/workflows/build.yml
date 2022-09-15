@@ -30,7 +30,7 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                   name: cache
-                  path: home/runner/.gradle/caches/transforms-3/
+                  path: /home/runner/.gradle/caches/transforms-3/
 
     gradle2:
         strategy:
@@ -60,5 +60,5 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                   name: cache
-                  path: home/runner/.gradle/caches/transforms-3/
+                  path: /home/runner/.gradle/caches/transforms-3/
 
