@@ -48,8 +48,9 @@ dependencies {
 
 normalization {
     runtimeClasspath {
+        ignore '**/jdk/internal/jimage/decompressor/**'
+        ignore '**/jdk/internal/jimage/jrfts/**'
         metaInf {
-
             ignoreProperty("Implementation-Version")
             ignoreProperty("Implementation-Vendor")
             ignoreProperty("Created-By")
