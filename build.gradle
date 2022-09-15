@@ -14,6 +14,7 @@ allprojects{
             ignore '**/internal/jimage/decompressor/**'
             ignore '**/internal/jrtfs/**'
             ignore '**/release'
+            ignore '**/modules'
             metaInf {
                 ignoreCompletely()
             }
