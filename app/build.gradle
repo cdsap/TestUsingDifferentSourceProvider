@@ -50,7 +50,7 @@ normalization {
     runtimeClasspath {
         ignore '**/jdk/internal/jimage/decompressor/**'
         ignore '**/jdk/internal/jrtfs/**'
-        ignore '**/release'
+        ignore 'release'
         metaInf {
             ignoreProperty("Implementation-Version")
             ignoreProperty("Implementation-Vendor")
