@@ -46,16 +46,3 @@ dependencies {
 }
 
 
-normalization {
-    runtimeClasspath {
-        ignore '**/internal/jimage/decompressor/**'
-        ignore '**/internal/jrtfs/**'
-        ignore 'release'
-        ignore '**/modules'
-        metaInf {
-            ignoreProperty("Implementation-Version")
-            ignoreProperty("Implementation-Vendor")
-            ignoreProperty("Created-By")
-        }
-    }
-}
