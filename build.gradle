@@ -16,9 +16,7 @@ allprojects{
             ignore '**/release'
             ignore '**/modules'
             metaInf {
-                ignoreProperty("Implementation-Version")
-                ignoreProperty("Implementation-Vendor")
-                ignoreProperty("Created-By")
+                ignoreCompletely()
             }
         }
     }
