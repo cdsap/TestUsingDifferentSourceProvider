@@ -11,8 +11,8 @@ plugins {
 allprojects{
     normalization {
         runtimeClasspath {
-            ignore '**/internal/jimage/decompressor/**'
-            ignore '**/internal/jrtfs/**'
+            //ignore '**/internal/jimage/decompressor/**'
+           // ignore '**/internal/jrtfs/**'
             ignore '**/release'
             ignore '**/modules'
             metaInf {
