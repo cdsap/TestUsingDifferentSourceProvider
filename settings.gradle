@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 gradleEnterprise {
-    server = System.getenv("GE_URL")
+    server = "https://ge.solutions-team.gradle.com"
     allowUntrustedServer = true
     buildScan {
         publishAlways()
