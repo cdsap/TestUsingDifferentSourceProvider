@@ -23,7 +23,7 @@ jobs:
                 curl -s "https://get.sdkman.io" | bash
                 source "$HOME/.sdkman/bin/sdkman-init.sh"
                 sdk install gradleprofiler 0.18.0
-                echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n  gradle-args = ["-Dscan.tag.pr -Dscan.tag.experiment"] \n}' >scenario
+                echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n  gradle-args = ["-Dscan.tag.pr", "-Dscan.tag.experiment"] \n}' >scenario
                 gradle-profiler --benchmark --scenario-file scenario assemble
 
             - name: Archive production artifacts
@@ -54,7 +54,7 @@ jobs:
                   curl -s "https://get.sdkman.io" | bash
                   source "$HOME/.sdkman/bin/sdkman-init.sh"
                   sdk install gradleprofiler 0.18.0
-                  echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n gradle-args = ["-Dscan.tag.main -Dscan.tag.experiment"] \n}' >scenario
+                  echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n gradle-args = ["-Dscan.tag.main" ,"-Dscan.tag.experiment"] \n}' >scenario
                   git fetch origin
                   git checkout main
                   gradle-profiler --benchmark --scenario-file scenario assemble
