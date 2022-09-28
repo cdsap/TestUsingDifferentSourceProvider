@@ -15,19 +15,16 @@ jobs:
 
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
-            - name: Install SDKMAN and Gradle Profiler
-              run: |
-                  curl -s "https://get.sdkman.io" | bash
-                  source "$HOME/.sdkman/bin/sdkman-init.sh"
-                  sdk install gradleprofiler 0.18.0
-            - name: Generate Scenario
-              run: |
-                  echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n}' >scenario
             - name: Execute Gradle build
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-              run: gradle-profiler --benchmark --scenario-file scenario assemble
+              run: |
+                curl -s "https://get.sdkman.io" | bash
+                source "$HOME/.sdkman/bin/sdkman-init.sh"
+                sdk install gradleprofiler 0.18.0
+                echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n}' >scenario
+                gradle-profiler --benchmark --scenario-file scenario assemble
 
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
@@ -49,16 +46,14 @@ jobs:
 
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
-            - name: Install SDKMAN and Gradle Profiler
-              run: |
-                  curl -s "https://get.sdkman.io" | bash
-                  source "$HOME/.sdkman/bin/sdkman-init.sh"
-                  sdk install gradleprofiler 0.18.0
             - name: Execute Gradle build
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
               run: |
+                  curl -s "https://get.sdkman.io" | bash
+                  source "$HOME/.sdkman/bin/sdkman-init.sh"
+                  sdk install gradleprofiler 0.18.0
                   echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n}' >scenario
                   git fetch origin
                   git checkout main
