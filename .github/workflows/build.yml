@@ -20,11 +20,14 @@ jobs:
                   curl -s "https://get.sdkman.io" | bash
                   source "$HOME/.sdkman/bin/sdkman-init.sh"
                   sdk install gradleprofiler 0.18.0
+            - name: Generate Scenario
+              run: |
+                  echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n}' >scenario
             - name: Execute Gradle build
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-              run: ./gradlew assembleDebug
+              run: gradle-profiler --benchmark --scenario-file scenario assemble
 
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
@@ -56,9 +59,11 @@ jobs:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
               run: |
-                git fetch origin
-                git checkout main
-                ./gradlew assembleDebug
+                  echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n}' >scenario
+                  git fetch origin
+                  git checkout main
+                  gradle-profiler --benchmark --scenario-file scenario assemble
+
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
               with:
