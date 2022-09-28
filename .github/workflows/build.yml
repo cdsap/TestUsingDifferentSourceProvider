@@ -55,7 +55,9 @@ jobs:
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-              run: ./gradlew assembleDebug
+              run: |
+                git checkout main
+                ./gradlew assembleDebug
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
               with:
