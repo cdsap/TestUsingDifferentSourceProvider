@@ -1,7 +1,7 @@
 name: Run Gradle on PRs
 on: pull_request
 jobs:
-    gradle:
+    prBranch:
         strategy:
             matrix:
                 os: [ubuntu-latest]
@@ -24,7 +24,7 @@ jobs:
                 source "$HOME/.sdkman/bin/sdkman-init.sh"
                 sdk install gradleprofiler 0.18.0
                 echo $'assemble { \n title= "assemble" \n tasks = [":help"] \n  gradle-args = ["-Dscan.tag.pr", "-Dscan.tag.experiment"] \n}' >scenario
-                gradle-profiler --benchmark --scenario-file scenario assemble
+
 
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
@@ -32,7 +32,7 @@ jobs:
                   name: cache
                   path: /home/runner/.gradle/caches/transforms-3/9a864bdf6138f0a2c754a9e732c2644a/transformed/output
 
-    gradle2:
+    mainBranch:
         strategy:
             matrix:
                 os: [ubuntu-latest]
@@ -57,7 +57,7 @@ jobs:
                   echo $'assemble { \n title= "assemble" \n tasks = [":help"]  \n gradle-args = ["-Dscan.tag.main" ,"-Dscan.tag.experiment"] \n}' >scenario
                   git fetch origin
                   git checkout main
-                  gradle-profiler --benchmark --scenario-file scenario assemble
+
 
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
@@ -66,7 +66,7 @@ jobs:
                   path: /home/runner/.gradle/caches/transforms-3/bf1362543da86239151d00c56f0b4149/transformed/output
 
     geapi:
-        needs: [gradle, gradle2]
+        needs: [prBranch, mainBranch]
         strategy:
             matrix:
                 os: [ubuntu-latest]
@@ -87,7 +87,7 @@ jobs:
               run: |
                   mkdir geapi
                   cd geapi
-                  git clone git@github.com:cdsap/GradleEnterpriseApiReports.git
+                  git clone https://github.com/cdsap/GradleEnterpriseApiReports.git
                   cd GradleEnterpriseApiReports
                   ./gradlew install
                   geapi/build/install/geapi/bin/geapi --help
