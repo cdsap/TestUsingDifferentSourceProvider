@@ -91,3 +91,12 @@ jobs:
                   cd GradleEnterpriseApiReports
                   ./gradlew install
                   geapi/build/install/geapi/bin/geapi --help
+            - uses: mshick/add-pr-comment@v1
+              with:
+                message: |
+                  **Hello**
+                  🌏
+                  !
+                repo-token: ${{ secrets.GITHUB_TOKEN }}
+                repo-token-user-login: 'github-actions[bot]' # The user.login for temporary GitHub tokens
+                allow-repeats: run # This is the default
