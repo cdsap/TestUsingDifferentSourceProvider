@@ -89,13 +89,19 @@ jobs:
                   cd geapi
                   git clone https://github.com/cdsap/GradleEnterpriseApiReports.git
                   cd GradleEnterpriseApiReports
+                  git checkout experiment_draft
                   ./gradlew install
-                  geapi/build/install/geapi/bin/geapi --help
+                  echo $GRADLE_ENTERPRISE_ACCESS_KEY > io
+                  geapi/build/install/geapi/bin/geapi --report=experiment --api-key=io --url=$GE_URL --task=assembleDebug --max-builds=100 --project=TestUsingDifferentSourceProvider --tags=main --tags=experiment --tags=pr > alo
+
+                  echo "sddsDS" > dile
+                  #awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > dile
             - uses: mshick/add-pr-comment@v1
               with:
                 message: |
                   **Hello**
                   🌏
+                  cat dile
                   !
                 repo-token: ${{ secrets.GITHUB_TOKEN }}
                 repo-token-user-login: 'github-actions[bot]' # The user.login for temporary GitHub tokens
