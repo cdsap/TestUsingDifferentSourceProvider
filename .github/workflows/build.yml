@@ -23,7 +23,7 @@ jobs:
                 curl -s "https://get.sdkman.io" | bash
                 source "$HOME/.sdkman/bin/sdkman-init.sh"
                 sdk install gradleprofiler 0.18.0
-                echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.pr", "-Dscan.tag.experiment"] \n}' >scenario
+                echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.pr", "-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
                 gradle-profiler --benchmark --scenario-file scenario assemble
 
             - name: Archive production artifacts
@@ -54,7 +54,7 @@ jobs:
                   curl -s "https://get.sdkman.io" | bash
                   source "$HOME/.sdkman/bin/sdkman-init.sh"
                   sdk install gradleprofiler 0.18.0
-                  echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.main" ,"-Dscan.tag.experiment"] \n}' >scenario
+                  echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.main" ,"-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
                   git fetch origin
                   git checkout main
                   gradle-profiler --benchmark --scenario-file scenario assemble
@@ -91,8 +91,8 @@ jobs:
                   cd GradleEnterpriseApiReports
                   git checkout experiment_draft
                   ./gradlew install
-                  echo $GRADLE_ENTERPRISE_ACCESS_KEY > io
-                  geapi/build/install/geapi/bin/geapi --report=experiment --api-key=io --url=$GE_URL --task=assembleDebug --max-builds=100 --project=TestUsingDifferentSourceProvider --tags=main --tags=experiment --tags=pr > alo
+                  echo $GRADLE_ENTERPRISE_ACCESS_KEY > fer.so
+                  geapi/build/install/geapi/bin/geapi --report=experiment --api-key=fer.so --url=$GE_URL --task=assembleDebug --max-builds=100 --project=TestUsingDifferentSourceProvider --tags=main --tags=experiment --tags=pr --tags=, "-Dscan.tag.${{github.run_number}}"> alo
 
                   echo "sddsDS" > dile
                   #awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > dile
