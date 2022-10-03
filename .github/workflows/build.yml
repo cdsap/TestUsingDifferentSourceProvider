@@ -23,8 +23,8 @@ jobs:
                 curl -s "https://get.sdkman.io" | bash
                 source "$HOME/.sdkman/bin/sdkman-init.sh"
                 sdk install gradleprofiler 0.18.0
-                echo $'assemble { \n title= "assemble" \n tasks = [":help"] \n  gradle-args = ["-Dscan.tag.pr", "-Dscan.tag.experiment"] \n}' >scenario
-
+                echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.pr", "-Dscan.tag.experiment"] \n}' >scenario
+                gradle-profiler --benchmark --scenario-file scenario assemble
 
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
@@ -54,10 +54,10 @@ jobs:
                   curl -s "https://get.sdkman.io" | bash
                   source "$HOME/.sdkman/bin/sdkman-init.sh"
                   sdk install gradleprofiler 0.18.0
-                  echo $'assemble { \n title= "assemble" \n tasks = [":help"]  \n gradle-args = ["-Dscan.tag.main" ,"-Dscan.tag.experiment"] \n}' >scenario
+                  echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.main" ,"-Dscan.tag.experiment"] \n}' >scenario
                   git fetch origin
                   git checkout main
-
+                  gradle-profiler --benchmark --scenario-file scenario assemble
 
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
@@ -92,7 +92,7 @@ jobs:
                   ./gradlew install
                   geapi/build/install/geapi/bin/geapi --help
             - uses: mshick/add-pr-comment@v1
-              with:
+              with:`
                 message: |
                   **Hello**
                   🌏
