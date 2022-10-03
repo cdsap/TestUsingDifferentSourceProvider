@@ -84,7 +84,7 @@ jobs:
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-                  GRADLE_API_KEY: ${{ secrets.GRADLE_API_KEY }}
+                  GRADLE_API_KEY: ${{ secrets.GE_API_KEY }}
               run: |
                   mkdir geapi
                   cd geapi
