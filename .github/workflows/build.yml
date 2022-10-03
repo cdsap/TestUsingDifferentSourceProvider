@@ -66,11 +66,11 @@ jobs:
                   path: /home/runner/.gradle/caches/transforms-3/bf1362543da86239151d00c56f0b4149/transformed/output
 
     geapi:
-        needs: [prBranch, mainBranch]
         strategy:
             matrix:
                 os: [ubuntu-latest]
         runs-on: ${{ matrix.os }}
+        needs: [ prBranch, mainBranch ]
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-java@v3
@@ -92,7 +92,7 @@ jobs:
                   ./gradlew install
                   geapi/build/install/geapi/bin/geapi --help
             - uses: mshick/add-pr-comment@v1
-              with:`
+              with:
                 message: |
                   **Hello**
                   🌏
