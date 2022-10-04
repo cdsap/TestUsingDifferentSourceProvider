@@ -81,6 +81,7 @@ jobs:
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
             - name: Execute Gradle build
+              id : geapi
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
@@ -99,12 +100,12 @@ jobs:
                   geapi/build/install/geapi/bin/geapi --report=experiment --api-key=$GRADLE_API_KEY --url=$GE_URL --task=assembleDebug --max-builds=100 --project=TestUsingDifferentSourceProvider --tags=main --tags=experiment --tags=pr --tags=${{github.run_number}}> alo
 
                   echo "sddsDS" > dile
-                  #awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > dile
+                  awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo
             - uses: mshick/add-pr-comment@v1
               with:
                 message: |
                   **Hello**
-                  🌏
+                  🌏${{ steps.geapi.outputs.content }}"
                     ${{github.run_number}}
                   cat dile
                   !
