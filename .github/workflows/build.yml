@@ -102,9 +102,9 @@ jobs:
 
                  # echo "sddsDS" > dile
                  # awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
+                  echo "cerdo" > alx
+                  echo "MESSAGE_DIFF=$(cat alx)" >> $GITHUB_ENV
 
-                  #echo "MESSAGE_DIFF=$(cat alo2)" >> $GITHUB_ENV
-                  echo "MESSAGE_DIFF=cerdaaaaa" >> $GITHUB_ENV
 
             - uses: mshick/add-pr-comment@v1
               with:
