@@ -106,15 +106,11 @@ jobs:
                   echo "MESSAGE_DIFF=$(cat alo2)" >> $GITHUB_ENV
             - uses: mshick/add-pr-comment@v1
               with:
-                message: |
-                  **Hello**
-                  🌏${{ steps.geapix.outputs }}"
-                    ${{github.run_number}}
-                  cat dile
-                    ```
+                message:
+
+
                      ${{ env.MESSAGE_DIFF }}
-                    ```
-                  !
+
                 repo-token: ${{ secrets.GITHUB_TOKEN }}
                 repo-token-user-login: 'github-actions[bot]' # The user.login for temporary GitHub tokens
                 allow-repeats: true # This is the default
