@@ -104,7 +104,7 @@ jobs:
                       awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
                       #cat alo2
                       #echo "12" > alo2
-                      echo "MESSAGE_DIFF=$(cat alo2)" >> $GITHUB_ENV
+                      echo "MESSAGE_DIFF=\"$(cat alo2)"\" >> $GITHUB_ENV
             - uses: actions/github-script@v5
               with:
                   github-token: ${{secrets.GITHUB_TOKEN}}
