@@ -103,7 +103,7 @@ jobs:
                   echo "sddsDS" > dile
                   awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
 
-                  echo "MESSAGE=${cat alo2}" >> $GITHUB_ENV
+                  echo "MESSAGE_DIFF=$(cat alo2)" >> $GITHUB_ENV
             - uses: mshick/add-pr-comment@v1
               with:
                 message: |
@@ -112,7 +112,7 @@ jobs:
                     ${{github.run_number}}
                   cat dile
                     ```
-                     ${{ env.MESSAGE }}
+                     ${{ env.MESSAGE_DIFF }}
                     ```
                   !
                 repo-token: ${{ secrets.GITHUB_TOKEN }}
