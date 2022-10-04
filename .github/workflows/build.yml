@@ -84,7 +84,7 @@ jobs:
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-                  GRADLE_API_KEY: ${{ secrets.GE_API_KEY }}
+                  GRADLE_API_KEY: ${{ secrets.TEST_SECRET }}
               run: |
                   mkdir geapi
                   cd geapi
@@ -92,6 +92,7 @@ jobs:
                   cd GradleEnterpriseApiReports
                   git checkout experiment_draft
                   ./gradlew install
+                   echo $GRADLE_API_KEY
 
 
                   geapi/build/install/geapi/bin/geapi --report=experiment --api-key=$GRADLE_API_KEY --url=$GE_URL --task=assembleDebug --max-builds=100 --project=TestUsingDifferentSourceProvider --tags=main --tags=experiment --tags=pr --tags=${{github.run_number}}> alo
