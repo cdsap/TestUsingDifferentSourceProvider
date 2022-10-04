@@ -80,8 +80,9 @@ jobs:
 
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
+
             - name: Execute Gradle build
-              id : geapi
+              id : geapix
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
@@ -101,11 +102,13 @@ jobs:
 
                   echo "sddsDS" > dile
                   awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo
+
+                  cat alo
             - uses: mshick/add-pr-comment@v1
               with:
                 message: |
                   **Hello**
-                  🌏${{ steps.geapi.outputs.content }}"
+                  🌏${{ steps.geapix.outputs }}"
                     ${{github.run_number}}
                   cat dile
                   !
