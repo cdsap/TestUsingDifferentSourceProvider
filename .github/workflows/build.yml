@@ -24,7 +24,7 @@ jobs:
                 source "$HOME/.sdkman/bin/sdkman-init.sh"
                 sdk install gradleprofiler 0.18.0
                 echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.pr", "-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
-                gradle-profiler --benchmark --scenario-file scenario assemble
+                #gradle-profiler --benchmark --scenario-file scenario assemble
 
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
@@ -57,7 +57,7 @@ jobs:
                   echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.main" ,"-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
                   git fetch origin
                   git checkout main
-                  gradle-profiler --benchmark --scenario-file scenario assemble
+                  #gradle-profiler --benchmark --scenario-file scenario assemble
 
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
@@ -102,7 +102,7 @@ jobs:
 
 
                       awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
-                      #cat alo2
+                      cat alo2
                       #echo "12 === lsldlsdldsldsldslc    " > alo2
                       #$(cat alo2)
                       #echo "::set-output name=random-number::$(echo "wewweewweewweew")"
@@ -119,5 +119,8 @@ jobs:
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
                         repo: context.repo.repo,
-                        body: '👋 ${{github.run_number}}  ===  ${{ steps.geapix.outputs.test }} ${{ needs.steps.geapi.outputs.random-number}} // ${{ steps.geapi.outputs.random-number}}  ---  ${{steps.geapix.outputs.output1}}!'
+                        body: '👋 ${{github.run_number}}  ===
+                                ```
+                                      ${{ steps.geapix.outputs.test }}
+                                ``` ${{ needs.steps.geapi.outputs.random-number}} // ${{ steps.geapi.outputs.random-number}}  ---  ${{steps.geapix.outputs.output1}}!'
                       })
