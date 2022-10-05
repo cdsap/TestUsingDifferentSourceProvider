@@ -109,16 +109,22 @@ jobs:
                       #echo "::set-output name=test::weewewewewewewewew"
 
                       echo "::set-output name=test::$(cat alo2)"
+                      echo   ${{ steps.geapix.outputs.test }}
                       #echo "MESSAGE_DIFF=\"$(cat alo2)"\" >> $GITHUB_ENV
             - name: Send
               uses: actions/github-script@v5
               with:
                   github-token: ${{secrets.GITHUB_TOKEN}}
                   script: |
+                      const comment = '
+                           Data for `${{ steps.get_id.outputs.an_id }}`:
+
+                            ```json
+                                    ${{ steps.geapix.outputs.test }}
+                            ```';
                       github.rest.issues.createComment({
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
                         repo: context.repo.repo,
-                        body: '👋 ${{github.run_number}}  ===  ```${{ steps.geapix.outputs.test }} ``` ${{ needs.steps.geapi.outputs.random-number}} // ${{ steps.geapi.outputs.random-number}}  ---  ${{steps.geapix.outputs.output1}}!'
+                        body: '👋 ${{github.run_number}}  === comment ${{ needs.steps.geapi.outputs.random-number}} // ${{ steps.geapi.outputs.random-number}}  ---  ${{steps.geapix.outputs.output1}}!'
                       })
-              run: "echo skskskskskksksksksksksks"
