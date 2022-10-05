@@ -102,7 +102,7 @@ jobs:
 
 
                       awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
-                      cat alo2
+                      #cat alo2
                       #echo "12 === lsldlsdldsldsldslc    " > alo2
                       #$(cat alo2)
                       #echo "::set-output name=random-number::$(echo "wewweewweewweew")"
@@ -117,7 +117,7 @@ jobs:
                   github-token: ${{secrets.GITHUB_TOKEN}}
                   script: |
                       const comment = '
-                           Data for `${{ steps.get_id.outputs.an_id }}`:
+                           Data for :
 
                             ```json
                                     ${{ steps.geapix.outputs.test }}
@@ -126,5 +126,5 @@ jobs:
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
                         repo: context.repo.repo,
-                        body: '👋 ${{github.run_number}}  === comment ${{ needs.steps.geapi.outputs.random-number}} // ${{ steps.geapi.outputs.random-number}}  ---  ${{steps.geapix.outputs.output1}}!'
+                        body: comment
                       })
