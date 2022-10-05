@@ -70,7 +70,6 @@ jobs:
             matrix:
                 os: [ubuntu-latest]
         runs-on: ${{ matrix.os }}
-        id: geapi
         outputs:
           output1: ${{ steps.geapi.outputs.test }}
         needs: [ prBranch, mainBranch ]
