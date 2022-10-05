@@ -112,7 +112,6 @@ jobs:
                       #echo "MESSAGE_DIFF=\"$(cat alo2)"\" >> $GITHUB_ENV
             - name: Send
               uses: actions/github-script@v5
-              run: "echo skskskskskksksksksksksks"
               with:
                   github-token: ${{secrets.GITHUB_TOKEN}}
                   script: |
@@ -122,3 +121,4 @@ jobs:
                         repo: context.repo.repo,
                         body: '👋 ${{github.run_number}}  ===  ```${{ steps.geapix.outputs.test }} ``` ${{ needs.steps.geapi.outputs.random-number}} // ${{ steps.geapi.outputs.random-number}}  ---  ${{steps.geapix.outputs.output1}}!'
                       })
+              run: "echo skskskskskksksksksksksks"
