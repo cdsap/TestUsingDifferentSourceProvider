@@ -99,8 +99,8 @@ jobs:
                       echo "4"
                       git checkout experiment_draft
                       echo "5"
-                      ./gradlew install
-                      geapi/build/install/geapi/bin/geapi --report=experiment --api-key=$GRADLE_API_KEY --url=$GE_URL --task=assembleDebug --max-builds=100 --project=TestUsingDifferentSourceProvider --tags=main --tags=experiment --tags=pr --tags=${{github.run_number}}> alo
+                      #./gradlew install
+                      #geapi/build/install/geapi/bin/geapi --report=experiment --api-key=$GRADLE_API_KEY --url=$GE_URL --task=assembleDebug --max-builds=100 --project=TestUsingDifferentSourceProvider --tags=main --tags=experiment --tags=pr --tags=${{github.run_number}}> alo
 
 
                       #awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
