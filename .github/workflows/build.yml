@@ -84,11 +84,7 @@ jobs:
               uses: gradle/gradle-build-action@v2
 
             - name: Execute Gradle build
-              uses: actions/github-script@v6
-              id: geapix
-              with:
-                  script: return "Hello!"
-                  result-encoding: string
+              id : geapix
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
@@ -113,7 +109,6 @@ jobs:
                       #$(cat alo2)
                       echo "::set-output name=test::weewewewewewewewew"
                       #echo "MESSAGE_DIFF=\"$(cat alo2)"\" >> $GITHUB_ENV
-
     send:
         runs-on: ubuntu-latest
         needs: [ geapi ]
