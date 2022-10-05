@@ -106,7 +106,8 @@ jobs:
                       #awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
                       #cat alo2
                       echo "12 === lsldlsdldsldsldsl" > alo2
-                      echo "::set-output name=test::$(cat alo2)"
+                      #$(cat alo2)
+                      echo "::set-output name=test::weewewewewewewewew"
                       #echo "MESSAGE_DIFF=\"$(cat alo2)"\" >> $GITHUB_ENV
     send:
         runs-on: ubuntu-latest
