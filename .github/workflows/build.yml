@@ -109,7 +109,9 @@ jobs:
                       #echo "::set-output name=test::weewewewewewewewew"
 
                       echo "::set-output name=test::$(cat alo2)"
+                      echo "inaki"
                       echo   ${{ steps.geapix.outputs.test }}
+                      echo "inaki2"
                       #echo "MESSAGE_DIFF=\"$(cat alo2)"\" >> $GITHUB_ENV
             - name: Send
               uses: actions/github-script@v5
@@ -117,11 +119,9 @@ jobs:
                   github-token: ${{secrets.GITHUB_TOKEN}}
                   script: |
                       const comment = '
-                           Data for :
 
-                            ```json
                                     ${{ steps.geapix.outputs.test }}
-                            ```';
+                           ';
                       github.rest.issues.createComment({
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
