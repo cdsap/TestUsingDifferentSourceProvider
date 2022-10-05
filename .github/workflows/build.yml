@@ -112,6 +112,7 @@ jobs:
                       #echo "MESSAGE_DIFF=\"$(cat alo2)"\" >> $GITHUB_ENV
             - name: Send
               uses: actions/github-script@v5
+              run: "echo skskskskskksksksksksksks"
               with:
                   github-token: ${{secrets.GITHUB_TOKEN}}
                   script: |
