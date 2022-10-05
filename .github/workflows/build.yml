@@ -103,9 +103,9 @@ jobs:
                       geapi/build/install/geapi/bin/geapi --report=experiment --api-key=$GRADLE_API_KEY --url=$GE_URL --task=assembleDebug --max-builds=100 --project=TestUsingDifferentSourceProvider --tags=main --tags=experiment --tags=pr --tags=${{github.run_number}}> alo
 
 
-                      awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
+                      #awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
                       #cat alo2
-                      #echo "12" > alo2
+                      echo "12 === lsldlsdldsldsldsl" > alo2
                       echo "::set-output name=test::$(cat alo2)"
                       #echo "MESSAGE_DIFF=\"$(cat alo2)"\" >> $GITHUB_ENV
     send:
