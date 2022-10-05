@@ -121,5 +121,5 @@ jobs:
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
                         repo: context.repo.repo,
-                        body: '👋 ${{github.run_number}}  ---  ${{needs.geapix.outputs.output1}}!'
+                        body: '👋 ${{github.run_number}}  ---  ${{steps.geapix.outputs.output1}}!'
                       })
