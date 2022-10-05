@@ -71,7 +71,7 @@ jobs:
                 os: [ubuntu-latest]
         runs-on: ${{ matrix.os }}
         outputs:
-          output1: ${{ steps.geapi.outputs.test }}
+          output1: ${{ steps.geapix.outputs.test }}
         needs: [ prBranch, mainBranch ]
         steps:
             - uses: actions/checkout@v3
