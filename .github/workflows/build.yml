@@ -70,8 +70,6 @@ jobs:
             matrix:
                 os: [ubuntu-latest]
         runs-on: ${{ matrix.os }}
-        outputs:
-          random-number: ${{ steps.geapix.outputs.random-number }}
         needs: [ prBranch, mainBranch ]
         steps:
             - uses: actions/checkout@v3
@@ -107,14 +105,13 @@ jobs:
                       #cat alo2
                       echo "12 === lsldlsdldsldsldsl" > alo2
                       #$(cat alo2)
-                      echo "::set-output name=random-number::$(echo "wewweewweewweew")"
+                      #echo "::set-output name=random-number::$(echo "wewweewweewweew")"
                       #echo "::set-output name=test::weewewewewewewewew"
+
+                      echo "::set-output name=test::hello"
                       #echo "MESSAGE_DIFF=\"$(cat alo2)"\" >> $GITHUB_ENV
-    send:
-        runs-on: ubuntu-latest
-        needs: [ geapi ]
-        steps:
-            - uses: actions/github-script@v5
+            - name: Send
+              uses: actions/github-script@v5
               with:
                   github-token: ${{secrets.GITHUB_TOKEN}}
                   script: |
@@ -122,5 +119,5 @@ jobs:
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
                         repo: context.repo.repo,
-                        body: '👋 ${{github.run_number}}  ===  ${{ needs.steps.geapi.outputs.random-number}} // ${{ steps.geapi.outputs.random-number}}  ---  ${{steps.geapix.outputs.output1}}!'
+                        body: '👋 ${{github.run_number}}  ===  ${{ steps.geapix.outputs.test }} ${{ needs.steps.geapi.outputs.random-number}} // ${{ steps.geapi.outputs.random-number}}  ---  ${{steps.geapix.outputs.output1}}!'
                       })
