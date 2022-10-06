@@ -118,10 +118,7 @@ jobs:
               with:
                   github-token: ${{secrets.GITHUB_TOKEN}}
                   script: |
-                      const comment = '
-
-                                    ${{ steps.geapix.outputs.test }}
-                           ';
+                      const comment = ' ${{ steps.geapix.outputs.test }}';
                       github.rest.issues.createComment({
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
