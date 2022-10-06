@@ -95,8 +95,6 @@ jobs:
                       git checkout experiment_draft
                       ./gradlew install
                       geapi/build/install/geapi/bin/geapi --report=experiment --api-key=$GRADLE_API_KEY --url=$GE_URL --task=assembleDebug --max-builds=100 --project=TestUsingDifferentSourceProvider --tags=main --tags=experiment --tags=pr --tags=${{github.run_number}}> alo
-
-
                       awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
                       CA=""
                       while IFS= read -r line
@@ -105,16 +103,12 @@ jobs:
                       done < alo2
                       echo ${CA}
                       echo "::set-output name=test::$CA"
-
-                      echo   ${{ steps.geapix.outputs.test }}se
-
-                      #echo "MESSAGE_DIFF=\"$(cat alo2)"\" >> $GITHUB_ENV
             - name: Send
               uses: actions/github-script@v5
               with:
                   github-token: ${{secrets.GITHUB_TOKEN}}
                   script: |
-                      const comment = 'sssssss \n  ```${{ steps.geapix.outputs.test }}';
+                      const comment = '```${{ steps.geapix.outputs.test }}';
                       github.rest.issues.createComment({
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
