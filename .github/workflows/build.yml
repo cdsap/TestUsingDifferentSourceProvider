@@ -108,6 +108,7 @@ jobs:
                       #echo "::set-output name=random-number::$(echo "wewweewweewweew")"
                       #echo "::set-output name=test::weewewewewewewewew"
                       #echo "assasasaSA \n sdjdsjdjsjdsjdsjds" > alk
+                      cat alo2
                       echo "::set-output name=test::$(cat alo2)"
                       echo "inaki"
                       echo   ${{ steps.geapix.outputs.test }}se
@@ -118,7 +119,7 @@ jobs:
               with:
                   github-token: ${{secrets.GITHUB_TOKEN}}
                   script: |
-                      const comment = 'sssssss  ```${{ steps.geapix.outputs.test }}``` asassasasaasas';
+                      const comment = 'sssssss \n  ```${{ steps.geapix.outputs.test }}``` \nasassasasaasas';
                       github.rest.issues.createComment({
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
