@@ -114,8 +114,9 @@ jobs:
                       CA=""
                       while IFS= read -r line
                       do
-                         echo "{CA}\n$line"
+                         CA="${CA}\n$line"
                       done < alo2
+                      echo ${CA}
                       echo "::set-output name=test::$CA"
 
                       echo   ${{ steps.geapix.outputs.test }}se
