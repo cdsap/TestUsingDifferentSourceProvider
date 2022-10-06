@@ -109,13 +109,14 @@ jobs:
                       #echo "::set-output name=test::weewewewewewewewew"
                       #echo "assasasaSA \n sdjdsjdjsjdsjdsjds" > alk
                       cat alo2
-                      echo "::set-output name=test::$(cat alo2)"
+
                       echo "inaki"
+                      CA=""
                       while IFS= read -r line
                       do
-                         echo "$line-------------------"
+                         echo "{CA}\n$line"
                       done < alo2
-
+                      echo "::set-output name=test::$CA"
 
                       echo   ${{ steps.geapix.outputs.test }}se
                       echo "inaki2"
