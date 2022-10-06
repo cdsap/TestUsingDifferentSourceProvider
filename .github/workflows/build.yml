@@ -111,6 +111,12 @@ jobs:
                       cat alo2
                       echo "::set-output name=test::$(cat alo2)"
                       echo "inaki"
+                      while IFS= read -r line
+                      do
+                         echo "$line-------------------"
+                      done < alo2
+
+
                       echo   ${{ steps.geapix.outputs.test }}se
                       echo "inaki2"
                       #echo "MESSAGE_DIFF=\"$(cat alo2)"\" >> $GITHUB_ENV
