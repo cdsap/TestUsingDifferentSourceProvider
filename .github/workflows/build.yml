@@ -55,9 +55,6 @@ jobs:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
               run: |
-                  curl -s "https://get.sdkman.io" | bash
-                  source "$HOME/.sdkman/bin/sdkman-init.sh"
-                  sdk install gradleprofiler 0.18.0
                   echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.main" ,"-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
                   git fetch origin
                   git checkout main
