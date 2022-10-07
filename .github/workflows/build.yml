@@ -32,7 +32,7 @@ jobs:
                     git checkout main
                   fi
                   mkdir gp
-                  unzip  ${{ steps.sdkman.outputs.file }} -d gp
+                  unzip  -jd gp ${{ steps.sdkman.outputs.file }}
                   ls
 
 
