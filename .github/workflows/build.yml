@@ -13,11 +13,7 @@ jobs:
                   distribution: temurin
                   java-version: 11
 
-            - name: Setup Gradle Profiler
-              uses: sdkman/sdkman-action@master
-              with:
-                  candidate: gradleprofiler
-                  version: 0.18.0
+
 
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
@@ -49,11 +45,6 @@ jobs:
                   distribution: zulu
                   java-version: 11.0.4
 
-            - name: Setup Gradle Profiler
-              uses: sdkman/sdkman-action@master
-              with:
-                  candidate: gradleprofiler
-                  version: 0.18.0
 
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
