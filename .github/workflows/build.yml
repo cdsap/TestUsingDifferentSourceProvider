@@ -26,7 +26,7 @@ jobs:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
               run: |
-                  if [ "${{ matrix.variant }}" == "main" ] then;
+                  if [ "${{ matrix.variant }}" == "main" ]; then
                     git fetch origin
                     git checkout main
                   fi
