@@ -13,19 +13,18 @@ jobs:
                   distribution: temurin
                   java-version: 11
 
-
-
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
+            - name: Execute Gradle build
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
               run: |
-                #   curl -s "https://get.sdkman.io" | bash
-                #source "$HOME/.sdkman/bin/sdkman-init.sh"
-                #sdk install gradleprofiler 0.18.0
-                echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.pr", "-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
-                gradle-profiler --benchmark --scenario-file scenario assemble
+                  curl -s "https://get.sdkman.io" | bash
+                  source "$HOME/.sdkman/bin/sdkman-init.sh"
+                  sdk install gradleprofiler 0.18.0
+                  echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.pr", "-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
+                  gradle-profiler --benchmark --scenario-file scenario assemble
 
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
@@ -45,18 +44,16 @@ jobs:
                   distribution: zulu
                   java-version: 11.0.4
 
-
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
-
             - name: Execute Gradle build
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
               run: |
-                  #curl -s "https://get.sdkman.io" | bash
-                  #source "$HOME/.sdkman/bin/sdkman-init.sh"
-                  #sdk install gradleprofiler 0.18.0
+                  curl -s "https://get.sdkman.io" | bash
+                  source "$HOME/.sdkman/bin/sdkman-init.sh"
+                  sdk install gradleprofiler 0.18.0
                   echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.main" ,"-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
                   git fetch origin
                   git checkout main
@@ -81,6 +78,9 @@ jobs:
                   distribution: zulu
                   java-version: 11.0.4
 
+            - name: Setup Gradle
+              uses: gradle/gradle-build-action@v2
+
             - name: Execute Gradle build
               id : geapix
               env:
@@ -88,21 +88,21 @@ jobs:
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
                   GRADLE_API_KEY: ${{ secrets.TEST_SECRET }}
               run: |
-                      mkdir geapi
-                      cd geapi
-                      git clone https://github.com/cdsap/GradleEnterpriseApiReports.git
-                      cd GradleEnterpriseApiReports
-                      git checkout experiment_draft
-                      ./gradlew install
-                      geapi/build/install/geapi/bin/geapi --report=experiment --api-key=$GRADLE_API_KEY --url=$GE_URL --task=assembleDebug --max-builds=100 --project=TestUsingDifferentSourceProvider --tags=main --tags=experiment --tags=pr --tags=${{github.run_number}}> alo
-                      awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
-                      CA=""
-                      while IFS= read -r line
-                      do
-                         CA="${CA}\n$line"
-                      done < alo2
-                      echo ${CA}
-                      echo "::set-output name=test::$CA"
+                  mkdir geapi
+                  cd geapi
+                  git clone https://github.com/cdsap/GradleEnterpriseApiReports.git
+                  cd GradleEnterpriseApiReports
+                  git checkout experiment_draft
+                  ./gradlew install
+                  geapi/build/install/geapi/bin/geapi --report=experiment --api-key=$GRADLE_API_KEY --url=$GE_URL --task=assembleDebug --max-builds=100 --project=TestUsingDifferentSourceProvider --tags=main --tags=experiment --tags=pr --tags=${{github.run_number}}> alo
+                  awk '/Processing build scan cache performance/ {p=1;next}; p==1 {print}' alo > alo2
+                  CA=""
+                  while IFS= read -r line
+                  do
+                     CA="${CA}\n$line"
+                  done < alo2
+                  echo ${CA}
+                  echo "::set-output name=test::$CA"
             - name: Send
               uses: actions/github-script@v5
               with:
