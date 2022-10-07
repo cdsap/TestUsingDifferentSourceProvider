@@ -34,7 +34,7 @@ jobs:
                   unzip  ${{ steps.sdkman.outputs.file }}
                   ls
                   echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.${{ matrix.variant }}", "-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
-                 gradle-profiler --benchmark --scenario-file scenario assemble
+                  gradle-profiler --benchmark --scenario-file scenario assemble
 
             - name: Archive production artifacts
               uses: actions/upload-artifact@v3
