@@ -15,8 +15,7 @@ jobs:
 
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
-            - name: Execute Gradle build
-              uses: sdkman/sdkman-action@master
+            - uses: sdkman/sdkman-action@master
               with:
                   candidate: gradleprofiler
                   version: 0.18.0
@@ -50,11 +49,12 @@ jobs:
 
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
-            - name: Execute Gradle build
-              uses: sdkman/sdkman-action@master
+            - uses: sdkman/sdkman-action@master
               with:
                   candidate: gradleprofiler
                   version: 0.18.0
+
+            - name: Execute Gradle build
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
