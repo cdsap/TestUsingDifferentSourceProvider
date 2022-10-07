@@ -13,12 +13,13 @@ jobs:
                   distribution: temurin
                   java-version: 11
 
-            - name: Setup Gradle
-              uses: gradle/gradle-build-action@v2
             - uses: sdkman/sdkman-action@master
               with:
                   candidate: gradleprofiler
                   version: 0.18.0
+
+            - name: Setup Gradle
+              uses: gradle/gradle-build-action@v2
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
@@ -47,12 +48,14 @@ jobs:
                   distribution: zulu
                   java-version: 11.0.4
 
-            - name: Setup Gradle
-              uses: gradle/gradle-build-action@v2
             - uses: sdkman/sdkman-action@master
               with:
                   candidate: gradleprofiler
                   version: 0.18.0
+
+
+            - name: Setup Gradle
+              uses: gradle/gradle-build-action@v2
 
             - name: Execute Gradle build
               env:
@@ -85,9 +88,6 @@ jobs:
               with:
                   distribution: zulu
                   java-version: 11.0.4
-
-            - name: Setup Gradle
-              uses: gradle/gradle-build-action@v2
 
             - name: Execute Gradle build
               id : geapix
