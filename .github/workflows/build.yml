@@ -31,7 +31,8 @@ jobs:
                     git fetch origin
                     git checkout main
                   fi
-                  sdkman --version
+                  sdk list java
+                  sdk list gradleprofiler
                   echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.${{ matrix.variant }}", "-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
                   gradleprofiler --benchmark --scenario-file scenario assemble
 
