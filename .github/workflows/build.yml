@@ -16,13 +16,17 @@ jobs:
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
             - name: Execute Gradle build
+              uses: sdkman/sdkman-action@master
+              with:
+                  candidate: gradleprofiler
+                  version: 0.18.0
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
               run: |
-                curl -s "https://get.sdkman.io" | bash
-                source "$HOME/.sdkman/bin/sdkman-init.sh"
-                sdk install gradleprofiler 0.18.0
+                #   curl -s "https://get.sdkman.io" | bash
+                #source "$HOME/.sdkman/bin/sdkman-init.sh"
+                #sdk install gradleprofiler 0.18.0
                 echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.pr", "-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
                 gradle-profiler --benchmark --scenario-file scenario assemble
 
@@ -47,13 +51,17 @@ jobs:
             - name: Setup Gradle
               uses: gradle/gradle-build-action@v2
             - name: Execute Gradle build
+              uses: sdkman/sdkman-action@master
+              with:
+                  candidate: gradleprofiler
+                  version: 0.18.0
               env:
                   GE_URL: ${{ secrets.GE_URL }}
                   GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
               run: |
-                  curl -s "https://get.sdkman.io" | bash
-                  source "$HOME/.sdkman/bin/sdkman-init.sh"
-                  sdk install gradleprofiler 0.18.0
+                  #curl -s "https://get.sdkman.io" | bash
+                  #source "$HOME/.sdkman/bin/sdkman-init.sh"
+                  #sdk install gradleprofiler 0.18.0
                   echo $'assemble { \n title= "assemble" \n tasks = ["assembleDebug"] \n cleanup-tasks = ["clean"] \n gradle-args = ["-Dscan.tag.main" ,"-Dscan.tag.experiment", "-Dscan.tag.${{github.run_number}}"] \n}' >scenario
                   git fetch origin
                   git checkout main
